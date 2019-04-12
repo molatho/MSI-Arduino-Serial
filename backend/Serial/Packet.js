@@ -1,13 +1,19 @@
 const PacketBuffer = require('./PacketBuffer');
 
 class Packet {
-    constructor(data, littleEndian) {
+    constructor() {
+        this.preambel = 0xDEADBEEF;
+        this.terminator = 0xCAFEBABE;
+        this.sensorData = [0, 0, 0, 0, 0, 0];
+    }
+    static fromBytes(data, littleEndian) {
+        var packet = new Packet();
         var buffer = new ArrayBuffer(data.length);
         var view = new DataView(buffer);
         data.forEach((b, i) => view.setUint8(i, b));
 
-        this.preambel = view.getUint32(0, littleEndian);
-        this.sensorData = [
+        packet.preambel = view.getUint32(0, littleEndian);
+        packet.sensorData = [
             view.getFloat32(4, littleEndian),
             view.getFloat32(8, littleEndian),
             view.getFloat32(12, littleEndian),
@@ -15,7 +21,7 @@ class Packet {
             view.getFloat32(20, littleEndian),
             view.getFloat32(24, littleEndian)
         ];
-        this.terminator = view.getUint32(28, littleEndian);
+        packet.terminator = view.getUint32(28, littleEndian);
     }
 
     toString() {

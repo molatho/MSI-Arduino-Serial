@@ -30,7 +30,7 @@ const CHART_DATA = {
 export default {
   extends: Line,
   mixins: [reactiveProp],
-  props: ['options', 'numRecords', 'showX', 'showY', 'showZ'],
+  props: ['options'],
   data: function(){
     return {
       xAxis: [],

@@ -45,7 +45,7 @@ class PacketBuffer {
         var packets = [];
         while ((packetIndex = this.search()) >= 0) {
             var packetBuffer = this.buffer.splice(packetIndex, PACKET_SIZE);
-            packets.push(new Packet(packetBuffer, this.littleEndian));
+            packets.push(Packet.fromBytes(packetBuffer, this.littleEndian));
         }
         return packets;
     }
