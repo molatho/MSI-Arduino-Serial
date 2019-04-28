@@ -17,21 +17,10 @@ wss.on('connection', function connection(ws) {
     })
 });
 
-/*
-var sComm = new SerialCommunication('COM4', 19200);
+
+var sComm = new SerialCommunication('/dev/cu.usbmodem14201', 19200);
 sComm.packetCallback = (packets) => {
     for (var p in packets) {
         processPacket(packets[p]);
     }
-};s
-*/
-
-var angle = 0;
-var packet = new Packet();
-setInterval(() => {
-    for (var i = 0; i < packet.sensorData.length; i++) {
-        packet.sensorData[i] = Math.sin((angle + 10 * i) * (Math.PI / 180));
-    }
-    processPacket(packet);
-    angle += 10;
-}, 500);
+};

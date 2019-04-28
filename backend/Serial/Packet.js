@@ -22,6 +22,7 @@ class Packet {
             view.getFloat32(24, littleEndian)
         ];
         packet.terminator = view.getUint32(28, littleEndian);
+        return packet;
     }
 
     toString() {

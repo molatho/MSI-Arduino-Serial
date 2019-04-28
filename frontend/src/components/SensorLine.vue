@@ -55,6 +55,30 @@ export default {
       this.yAxis = [];
       this.zAxis = [];
     },
+    assignOffset() {
+      this.config.offset = [
+        this.xAxis[this.xAxis.length-1],
+        this.yAxis[this.yAxis.length-1],
+        this.zAxis[this.zAxis.length-1]
+      ] 
+    },
+    dump(name) {
+      console.log("==================================");
+      console.log(` ${name} BEGIN OF DATA DUMP `)
+      console.log("==================================");
+
+      var data = {
+        x: this.xAxis,
+        y: this.yAxis,
+        z: this.zAxis
+      };
+      var str = JSON.stringify(data);
+      console.log(str);
+
+      console.log("==================================");
+      console.log(` ${name} END OF DATA DUMP `)
+      console.log("==================================");
+    },
     addRecord(x, y, z) {
       if (this.chartData === undefined) this.chartData = CHART_DATA;
       if (!this.config.recording) return;
@@ -69,21 +93,21 @@ export default {
           this.chartData.labels.length - this.config.numRecords
         );
 
-      this.xAxis.push(x);
+      this.xAxis.push(x - this.config.offset[0]);
       if (
         this.config.limitRecords &&
         this.xAxis.length > this.config.numRecords
       )
         this.xAxis.splice(0, this.xAxis.length - this.config.numRecords);
 
-      this.yAxis.push(y);
+      this.yAxis.push(y - this.config.offset[1]);
       if (
         this.config.limitRecords &&
         this.yAxis.length > this.config.numRecords
       )
         this.yAxis.splice(0, this.yAxis.length - this.config.numRecords);
 
-      this.zAxis.push(z);
+      this.zAxis.push(z - this.config.offset[2]);
       if (
         this.config.limitRecords &&
         this.zAxis.length > this.config.numRecords

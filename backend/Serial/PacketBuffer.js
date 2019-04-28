@@ -24,17 +24,23 @@ class PacketBuffer {
     
     static get PACKET_SIZE() { return PACKET_SIZE; } 
 
+    matches(offset) {
+        if (this.buffer.length < offset + PACKET_SIZE) return false;
+        for (var i = 0; i < this.searchPattern.length; i++) {
+            if (this.buffer[offset+i] != this.searchPattern[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
     search() {
         var found = true;
         if (this.buffer.length < PACKET_SIZE) return -1;
         for (var bufferIndex = 0; bufferIndex < this.buffer.length - this.searchPattern.length - 1; bufferIndex++) {
-            for (var i = 0; i < this.searchPattern.length; i++) {
-                if (this.buffer[bufferIndex+i] != this.searchPattern[i]){
-                    found = false;
-                    break;
-                }
+            if (this.matches(bufferIndex)) {
+                return bufferIndex;
             }
-            if (found) return bufferIndex;
         }
         return -1;
     }

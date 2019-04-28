@@ -17,12 +17,26 @@
         size="sm"
         variant="danger"
         v-on:click="()=>{this.$emit('clear');}"
-      ><i class="fas fa-ban"></i> Clear</b-button>
+      ><i class="fas fa-ban"></i></b-button>
       <b-button
         size="sm"
         variant="info"
-        v-on:click="()=>{this.$emit('save');}"
-      ><i class="fas fa-save"></i> Copy</b-button>
+        v-on:click="()=>{this.$emit('dump');}"
+      ><i class="fas fa-terminal"></i></b-button>
+
+      <b-form-input v-model="config.offset[0]" :type="'number'" number></b-form-input>
+      <b-form-input v-model="config.offset[1]" :type="'number'" number></b-form-input>
+      <b-form-input v-model="config.offset[2]" :type="'number'" number></b-form-input>
+      <b-button
+        size="sm"
+        variant="info"
+        v-on:click="()=>{this.$emit('setOffset');}"
+      ><i class="fas fa-chart-line"></i></b-button>
+      <b-button
+        size="sm"
+        variant="danger"
+        v-on:click="()=>{this.$emit('clearOffset');}"
+      ><i class="fas fa-ban"></i></b-button>
     </b-form-group>
   </div>
 </template>
