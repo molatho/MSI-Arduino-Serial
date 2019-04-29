@@ -24,3 +24,13 @@ sComm.packetCallback = (packets) => {
         processPacket(packets[p]);
     }
 };
+
+/*var angle = 0;
+var packet = new Packet();
+setInterval(() => {
+    for (var i = 0; i < packet.sensorData.length; i++) {
+        packet.sensorData[i] = Math.sin((angle + 10 * i) * (Math.PI / 180));
+    } 
+    processPacket(packet);
+    angle += 10;
+}, 50);*/

@@ -67,11 +67,21 @@ export default {
       console.log(` ${name} BEGIN OF DATA DUMP `)
       console.log("==================================");
 
-      var data = {
-        x: this.xAxis,
-        y: this.yAxis,
-        z: this.zAxis
-      };
+      var data = Array.apply(null, {length: Math.min(this.xAxis.length, this.yAxis.length, this.zAxis.length)})
+                        .map(Number.call, Number)
+                        .map(i => { return [
+                          this.xAxis[i],
+                          this.yAxis[i],
+                          this.zAxis[i]
+                        ]; });
+
+      /*for (var i = 0; i < this.xAxis.length && i < this.yAxis.length && i < this.zAxis.length) {
+        data.push([
+          this.xAxis[i],
+          this.yAxis[i],
+          this.zAxis[i]
+        ]);
+      }*/
       var str = JSON.stringify(data);
       console.log(str);
 
